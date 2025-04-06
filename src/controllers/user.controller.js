@@ -21,6 +21,7 @@ export const loginUserController = async (req, res, next) => {
         if (!email) throw new Error("Email is required");
         if (!password) throw new Error("Password is required");
         const response = await loginUser({ email, password });
+        console.log(response);
         res.status(200).json({ success: true, message: 'User logged in successfully', user: response });
     } catch (error) {
         next(error);

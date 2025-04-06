@@ -35,6 +35,7 @@ export const loginUser = async ({
         throw new Error("User not found!");
     }
     const MatchedPassword = bcrypt.compare(password, user?.password);
+    console.log(MatchedPassword, user?.password);
     if (!MatchedPassword) {
         throw new Error("Invalid password!");
     }
@@ -83,3 +84,4 @@ export const updateUserDetails = async ({
         throw new Error(error);
     }
 };
+
