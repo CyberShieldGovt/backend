@@ -174,7 +174,7 @@ export const updateComplain = async ({
           <body>
             <div class="container">
               <div class="logo">
-                <img src="https://cybertrinetra.com/logo.png" alt="CyberTrinetra Logo" />
+                <img src="https://complains03.s3.ap-south-1.amazonaws.com/logo.jpeg" alt="CyberTrinetra Logo" />
               </div>
               <div class="title">Complaint Status Updated</div>
               <div class="content">
@@ -182,7 +182,7 @@ export const updateComplain = async ({
                 We would like to inform you that the status of your complaint with the ID <strong>${complainId}</strong> has been updated.<br><br>
                 <strong>Current Status:</strong> <span class="status">${status}</span><br>
                 <strong>Remarks:</strong> ${comment || "No additional remarks"}<br><br>
-                You can track this complaint anytime using the “Track Case” section on our portal with your Complaint ID.
+                You can track this complaint anytime using the “Check Case Status” section on our portal with your Complaint ID.
                 <div class="note">
                   🔐 <strong>Note:</strong> For your safety, never share your login credentials, passwords, or personal information. CyberTrinetra will never request such information via email, call, or SMS.
                 </div><br>

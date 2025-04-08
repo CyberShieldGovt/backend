@@ -65,7 +65,7 @@ export const registerComplain = async ({
                         <li><strong>Category:</strong> ${category}</li>
                         <li><strong>Description:</strong> ${description}</li>
                     </ul>
-                    <p>You can track your complaint status using the Complaint ID on our portal under the “Track Case” section.</p>
+                    <p>You can track your complaint status using the Complaint ID on our portal under the “Check Case Status” section.</p>
                     <div style="background: #fff3cd; padding: 10px; border-left: 4px solid #ffcc00; margin-top: 20px;">
                         🔐 <strong>Note:</strong> Please do not share your credentials, passwords, UPI IDs, or personal information with anyone. CyberTrinetra will never ask for such details.
                     </div>
