@@ -12,13 +12,11 @@ export const registerComplain = async ({
     complain,
     extraDoc
 }) => {
-    // const firUrl = await uploadToS3(complain);
-    // let extraDocUrl = '';
-    // if (extraDoc) {
-    //     extraDocUrl = await uploadToS3(extraDoc);
-    // }
-    const firUrl = "test";
-    const extraDocUrl = "test";
+    const firUrl = await uploadToS3(complain);
+    let extraDocUrl = '';
+    if (extraDoc) {
+        extraDocUrl = await uploadToS3(extraDoc);
+    }
 
     const user = await User.findById(userId);
     if (!user) throw new Error("User not found!");
