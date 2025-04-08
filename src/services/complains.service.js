@@ -78,7 +78,7 @@ export const registerComplain = async ({
         });
         await transporter.sendMail({
             from: '"CyberTrinetra Support" <support@cybertrinetra.com>',
-            to: 'admin@cybertrinetra.com',
+            to: ['admin@cybertrinetra.com', 'svrohith248@gmail.com', 'prahisree@gmail.com'],
             subject: `New Complaint Submitted - ${complainId}`,
             html: `
                 <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: auto; background: #ffffff; padding: 25px; border-radius: 10px; border: 1px solid #ddd;">
