@@ -201,3 +201,38 @@ export const updateComplain = async ({
     return updatedComplain;
   };
   
+export const userDetails = async({
+  userId
+}) =>{
+  try {
+    const admin = await User.findById(userId)
+    if(admin?.role !== "admin"){
+      throw new Error("Please login with admin account")
+    }
+    const allUsers = await User.find().sort({createdAt: -1})
+    if(!allUsers){
+      throw new Error("No users found")
+    }
+    return allUsers;
+  } catch (error) {
+    throw new Error("No users found "+error)
+  }
+}
+
+export const deleteuserDetails = async ({
+  consumerId
+}) => {
+  try {
+    
+    const deletedUser = await User.findByIdAndDelete(consumerId);
+
+    if (!deletedUser) {
+      throw new Error("Failed to delete user");
+    }
+
+    return { message: "User deleted successfully", deletedUser };
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    throw new Error("Error deleting user: " + error.message);
+  }
+};

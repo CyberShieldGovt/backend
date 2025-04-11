@@ -79,7 +79,7 @@ export const registerComplain = async ({
         await transporter.sendMail({
             from: '"CyberTrinetra Support" <support@cybertrinetra.com>',
             to: 'admin@cybertrinetra.com', 
-            cc: [                         \
+            cc: [                         
                 'svrohith248@gmail.com',
                 'prahisree@gmail.com'
             ],
