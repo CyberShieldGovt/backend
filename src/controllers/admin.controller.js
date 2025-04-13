@@ -1,4 +1,4 @@
-import { adminAnalytics, deleteuserDetails, getComplains, updateComplain, userDetails } from "../services/admin.services.js";
+import { adminAnalytics, deleteuserDetails, getComplains, sendOtpForLogin, updateComplain, userDetails } from "../services/admin.services.js";
 
 export const adminAnalyticsController = async (req, res, next) => {
     try {
@@ -76,3 +76,14 @@ export const adminuserDeleteController = async (req, res, next) => {
     }
 };
 
+export const sendOtpForLoginController = async (req, res, next) => {
+    try {
+        console.log("sendOtpForLoginController")
+        const { email } = req.body;
+        if (!email) throw new Error("Email is required");
+        const response = await sendOtpForLogin({ email });
+        res.status(200).json({ success: true, message: 'OTP sent successfully', user: response });
+    } catch (error) {
+        next(error);
+    }
+}

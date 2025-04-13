@@ -1,6 +1,7 @@
 import User from "../models/User.model.js";
 import Complains from "../models/Complains.model.js";
 import transporter from "../config/mailer.js";
+import Otp from "../models/Otp.model.js";
 
 const calculatePercentageChange = (previous, current) => {
     if (previous === 0) return 0;
@@ -236,3 +237,41 @@ export const deleteuserDetails = async ({
     throw new Error("Error deleting user: " + error.message);
   }
 };
+
+export const sendOtpForLogin = async ({ email }) => {
+    try {
+        const user = await User.findOne({ email })
+        if(!user) throw new Error("User not found")
+        if(user.role !== "admin") throw new Error("Please login with admin account")
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        const existingOtp = await Otp.findOne({ email });
+        if (existingOtp) {
+            existingOtp.otp = otp;
+            await existingOtp.save();
+        } else {
+            await Otp.create({ email, otp });
+        }
+        await transporter.sendMail({
+            from: '"CyberTrinetra Admin" <admin@cybertrinetra.com>',
+            to: email,
+            subject: "Your OTP for CyberTrinetra",
+            html: `
+              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+                <h2 style="color: #2d3748;">CyberTrinetra Verification</h2>
+                <p>Hi there,</p>
+                <p>We received a request to verify your email for CyberTrinetra.</p>
+                <p>Please use the following One-Time Password (OTP) to complete your verification:</p>
+                <div style="font-size: 32px; font-weight: bold; color: #3182ce; margin: 20px 0;">${otp}</div>
+                <p>This OTP is valid for the next 5 minutes. Please do not share it with anyone.</p>
+                <p>If you did not request this, you can safely ignore this email.</p>
+                <br />
+                <p>Best regards,<br/>CyberTrinetra Admin Team</p>
+              </div>
+            `,
+          });
+        return otp;
+    } catch (error) {
+        console.error("Error in sending OTP:", error);
+        throw new Error(error);
+    }
+}

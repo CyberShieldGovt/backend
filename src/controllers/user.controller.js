@@ -1,4 +1,4 @@
-import { registerUser, loginUser, getUserById, updateUserDetails, sendOtp, forgetPassword } from "../services/user.service.js";
+import { registerUser, loginUser, getUserById, updateUserDetails, sendOtp, forgetPassword, sendOtpForRegister, verifyOtp } from "../services/user.service.js";
 
 export const registerUserController = async (req, res, next) => {
     try {
@@ -78,6 +78,29 @@ export const forgetPasswordController = async (req, res, next) => {
 
         const response = await forgetPassword({ email, otp, password });
         res.status(200).json({ success: true, message: 'Password updated successfully', user: response });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const sendOtpForRegisterController = async (req, res, next) => {
+    try {
+        const { email } = req.body;
+        if (!email) throw new Error("Email is required");
+        const response = await sendOtpForRegister({ email });
+        res.status(200).json({ success: true, message: 'OTP sent successfully', user: response });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const verifyOtpRegisterController = async (req, res, next) => {
+    try {
+        const { email, otp } = req.body;
+        if (!email) throw new Error("Email is required");
+        if (!otp) throw new Error("OTP is required");
+        const response = await verifyOtp({ email, otp });
+        res.status(200).json({ success: true, message: 'OTP verified successfully', user: response });
     } catch (error) {
         next(error);
     }
